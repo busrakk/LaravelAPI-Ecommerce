@@ -17,27 +17,26 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+     const STATUS_ACTIVE = 1;
+     const STATUS_INACTIVE = 0;
+
+     const ROLE_ADMIN = 1;
+     const ROLE_USER = 0;
+
     protected $fillable = [
         'name',
         'email',
         'password',
+        'role_as',
+        'status',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];

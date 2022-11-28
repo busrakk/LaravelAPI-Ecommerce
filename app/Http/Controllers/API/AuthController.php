@@ -69,13 +69,22 @@ class AuthController extends Controller
             ]);
         }
 
-        $token = $user->createToken($user->email . '_token')->plainTextToken;
+        // $token = $user->createToken($user->email . '_token')->plainTextToken;
+
+        if($user->role_as == User::ROLE_ADMIN){
+            $role = 'admin';
+            $token = $user->createToken($user->email . '_AdminToken', ['server:admin'])->plainTextToken;
+        }else{
+            $role = '';
+            $token = $user->createToken($user->email . '_token', [''])->plainTextToken;
+        }
 
         return response()->json([
             'success' => true,
             'message' => 'Logged in Successfully',
             'username' => $user->name,
-            'token' => $token
+            'token' => $token,
+            'role' => $role
         ]);
     }
 
