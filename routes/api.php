@@ -24,7 +24,15 @@ Route::middleware(['auth:sanctum', 'isAPIAdmin'])->group( function(){
     Route::get('checkAuthenticated', function(){
         return response()->json(['message' => 'You are in', 'status'=>200], 200);
     });
-    // Route::post('logout', [AuthController::class, 'logout']);
+
+    Route::group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\API'], function(){
+        //Category route
+        Route::post('category-list', 'CategoryController@index');
+        Route::post('category-store', 'CategoryController@store');
+        Route::post('category-update/{id}', 'CategoryController@update');
+        Route::post('category-delete/{id}', 'CategoryController@destroy');
+    });
+
 });
 
 Route::middleware(['auth:sanctum'])->group( function(){
