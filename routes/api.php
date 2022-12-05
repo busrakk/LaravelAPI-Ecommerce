@@ -31,6 +31,7 @@ Route::middleware(['auth:sanctum', 'isAPIAdmin'])->group( function(){
         Route::post('category-store', 'CategoryController@store');
         Route::post('category-update/{id}', 'CategoryController@update');
         Route::post('category-delete/{id}', 'CategoryController@destroy');
+        Route::post('category/{id}', 'CategoryController@find');
     });
 
 });
